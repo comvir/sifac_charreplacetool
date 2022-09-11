@@ -1,0 +1,17 @@
+D:\work\DemoCollection\LLCharReplace\bin\Debug\net6.0-windows\LLCharReplace.exe
+D:\work\DemoCollection\LLCharReplace\bin\Debug\net6.0-windows\LLCharReplace.deps.json
+D:\work\DemoCollection\LLCharReplace\bin\Debug\net6.0-windows\LLCharReplace.runtimeconfig.json
+D:\work\DemoCollection\LLCharReplace\bin\Debug\net6.0-windows\LLCharReplace.dll
+D:\work\DemoCollection\LLCharReplace\bin\Debug\net6.0-windows\ref\LLCharReplace.dll
+D:\work\DemoCollection\LLCharReplace\bin\Debug\net6.0-windows\LLCharReplace.pdb
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.csproj.AssemblyReference.cache
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.Form1.resources
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.csproj.GenerateResource.cache
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.GeneratedMSBuildEditorConfig.editorconfig
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.AssemblyInfoInputs.cache
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.AssemblyInfo.cs
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.csproj.CoreCompileInputs.cache
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.dll
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\ref\LLCharReplace.dll
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.pdb
+D:\work\DemoCollection\LLCharReplace\obj\Debug\net6.0-windows\LLCharReplace.genruntimeconfig.cache

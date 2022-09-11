@@ -45,6 +45,10 @@ public partial class Form1 : Form
         ddl_charTarget.DisplayMember = "value";
         ddl_charReplace.DisplayMember = "label";
         ddl_charReplace.DisplayMember = "value";
+        ddl_target_group.DisplayMember = "label";
+        ddl_target_group.DisplayMember = "value";
+        ddl_replace_group.DisplayMember = "label";
+        ddl_replace_group.DisplayMember = "value";
     }
 
     private void Form1_Load(object sender, EventArgs e)
@@ -54,6 +58,7 @@ public partial class Form1 : Form
             input_gamefolder.Text = Settings.Default.gamefolder;
             IsSIFACFolder(Settings.Default.gamefolder);
         }
+        ddl_group.SelectedIndex = 0;
     }
 
     private void input_gamefolder_TextChanged(object sender, EventArgs e)
@@ -109,7 +114,21 @@ public partial class Form1 : Form
         canwork = File.Exists($"{path}/ll3.exe");
         return canwork;
     }
-    #region tab1
+    bool RestoreFile(string filepath)
+    {
+        if (!File.Exists(filepath))
+        {
+            return false;
+        }
+        var filep_bak = $"{filepath}.bak";
+        if (File.Exists(filep_bak))
+        {
+            File.Copy(filep_bak, filepath, true);
+            return true;
+        }
+        return false;
+    }
+    #region tab-solo
     private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
     {
         tabActiveIdx = tabControl1.SelectedIndex;
@@ -164,7 +183,7 @@ public partial class Form1 : Form
         }
         ddl_charTarget.DataSource = listdata;
         var listdata_new = listdata.ToList();
-        listdata_new.Add(new ListMember { label = chooseChar.value, value = $"{chooseChar.value}.pac" });
+        listdata_new.Add(new ListMember { label = "basebody", value = $"{chooseChar.value}.pac" });
         ddl_charReplace.DataSource = listdata_new.ToArray();
         ddl_charReplace.SelectedIndex = 0;
         if (chooseChar.label.Contains("¦Ì's"))
@@ -217,19 +236,134 @@ public partial class Form1 : Form
         var chooseReplace = ddl_charReplace.SelectedItem as ListMember;
         var dir_target = Path.Combine(input_gamefolder.Text, "chr", chooseChar.value, chooseTarget.value, $"{chooseTarget.value}.pac");
         var dir_replace = Path.Combine(input_gamefolder.Text, "chr", chooseChar.value, chooseReplace.value, $"{chooseReplace.value}.pac");
-        if (chooseReplace.value.Contains(".pac"))
+        if (chooseReplace.label.Contains("basebody"))
         {
-            dir_replace= Path.Combine(input_gamefolder.Text, "chr", chooseChar.value, chooseReplace.value);
+            dir_replace = Path.Combine(input_gamefolder.Text, "chr", chooseChar.value, chooseReplace.value);
         }
         BakFile(dir_target);
         File.Copy(dir_replace, dir_target, true);
         MessageBox.Show($"the char \"{chooseChar.value}\" replace \"{chooseTarget.value}\" from \"{chooseReplace.value}\" success!");
     }
+    private void btn_restore_Click(object sender, EventArgs e)
+    {
+        var chooseChar = ddl_char.SelectedItem as ListMember;
+        var chooseTarget = ddl_charTarget.SelectedItem as ListMember;
+        var dir_target = Path.Combine(input_gamefolder.Text, "chr", chooseChar.value, chooseTarget.value, $"{chooseTarget.value}.pac");
+        if (RestoreFile(dir_target))
+        {
+            MessageBox.Show("restore success");
+        }
+        else
+        {
+            MessageBox.Show("no back file");
+        }
+    }
+
 
     #endregion
-    #region tab2
+
+    #region tab-group
+
+    private void btn_replace_group_Click(object sender, EventArgs e)
+    {
+        var choosegroup = ddl_group.SelectedItem as string;
+        var chars = charGroups[choosegroup];
+        var chooseTarget = ddl_target_group.SelectedItem as ListMember;
+        var chooseReplace = ddl_replace_group.SelectedItem as ListMember;
+        var results = new Dictionary<string, string>();
+        foreach (var chr in chars)
+        {
+            var dir_target = Path.Combine(input_gamefolder.Text, "chr", chr, chooseTarget.value, $"{chooseTarget.value}.pac");
+            var dir_replace = Path.Combine(input_gamefolder.Text, "chr", chr, chooseReplace.value, $"{chooseReplace.value}.pac");
+            if (chooseReplace.value == "basebody")
+            {
+                dir_replace = Path.Combine(input_gamefolder.Text, "chr", chr, $"{chr}.pac");
+            }
+            if (!File.Exists(dir_target))
+            {
+                results.Add(chr, $"no such target \"{dir_target}\"");
+                continue;
+            }
+            if (!File.Exists(dir_replace))
+            {
+                results.Add(chr, $"no such replace \"{dir_replace}\"");
+                continue;
+            }
+            BakFile(dir_target);
+            File.Copy(dir_replace, dir_target, true);
+            results.Add(chr, "success");
+        }
+        var msg = string.Join('\n', results.Select(d => $"{d.Key}¡ú{d.Value}"));
+        msg = $"replace group char {chooseTarget.value} from {chooseReplace.value} results:\r\n{msg}";
+        MessageBox.Show(msg);
+    }
+    private void btn_restore_group_Click(object sender, EventArgs e)
+    {
+        var choosegroup = ddl_group.SelectedItem as string;
+        var chars = charGroups[choosegroup];
+        var chooseTarget = ddl_target_group.SelectedItem as ListMember;
+        var results = new Dictionary<string, string>();
+        foreach (var chr in chars)
+        {
+            var dir_target = Path.Combine(input_gamefolder.Text, "chr", chr, chooseTarget.value, $"{chooseTarget.value}.pac");
+            if (!File.Exists(dir_target))
+            {
+                results.Add(chr, $"no such target \"{dir_target}\"");
+                continue;
+            }
+            RestoreFile(dir_target);
+            results.Add(chr, "success");
+        }
+        var msg = string.Join('\n', results.Select(d => $"{d.Key}¡ú{d.Value}"));
+        msg = $"restore group char {chooseTarget.value} results:\r\n{msg}";
+        MessageBox.Show(msg);
+    }
+    private void ddl_group_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var choosegroup = ddl_group.SelectedItem as string;
+        var dir_char = Path.Combine(input_gamefolder.Text, "chr", charGroups[choosegroup][0]);
+        var dirs = Directory.GetDirectories(dir_char);
+        var listdata = new List<ListMember>();
+        foreach (var dir in dirs)
+        {
+            var dir_name = dir.Substring(dir.LastIndexOf('\\') + 1);
+            listdata.Add(new ListMember { label = dir_name, value = dir_name });
+        }
+        ddl_target_group.DataSource = listdata;
+        ddl_target_group.SelectedIndex = 0;
+        var listdata_new = listdata.ToList();
+        listdata_new.Add(new ListMember { label = "basebody", value = "basebody" });
+        ddl_replace_group.DataSource = listdata_new;
+        ddl_replace_group.SelectedIndex = 0;
+        switch (choosegroup)
+        {
+            case "¦Ì's":
+                var find = listdata.FirstOrDefault(d => d.label == "d001");
+                if (find != null)
+                {
+                    ddl_target_group.SelectedItem = find;
+                }
+                break;
+            case "Aqours":
+                var find2 = listdata.FirstOrDefault(d => d.label == "d090");
+                if (find2 != null)
+                {
+                    ddl_target_group.SelectedItem = find2;
+                }
+                break;
+            default:
+                var find3 = listdata.FirstOrDefault(d => d.label == "d200");
+                if (find3 != null)
+                {
+                    ddl_target_group.SelectedItem = find3;
+                }
+                break;
+        }
+    }
 
     #endregion
+
+
 }
 class ListMember
 {

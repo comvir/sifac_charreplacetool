@@ -38,12 +38,22 @@
             this.ddl_charTarget = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btn_restore = new System.Windows.Forms.Button();
             this.btnGo = new System.Windows.Forms.Button();
             this.btnLoadCharList = new System.Windows.Forms.Button();
             this.ddl_char = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btn_replace_group = new System.Windows.Forms.Button();
+            this.btn_restore_group = new System.Windows.Forms.Button();
+            this.ddl_replace_group = new System.Windows.Forms.ComboBox();
+            this.ddl_target_group = new System.Windows.Forms.ComboBox();
+            this.ddl_group = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -105,6 +115,7 @@
             this.tabPage1.Controls.Add(this.ddl_charTarget);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.btn_restore);
             this.tabPage1.Controls.Add(this.btnGo);
             this.tabPage1.Controls.Add(this.btnLoadCharList);
             this.tabPage1.Controls.Add(this.ddl_char);
@@ -119,6 +130,7 @@
             // 
             // ddl_charReplace
             // 
+            this.ddl_charReplace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddl_charReplace.FormattingEnabled = true;
             this.ddl_charReplace.Location = new System.Drawing.Point(61, 86);
             this.ddl_charReplace.Name = "ddl_charReplace";
@@ -127,6 +139,7 @@
             // 
             // ddl_charTarget
             // 
+            this.ddl_charTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddl_charTarget.FormattingEnabled = true;
             this.ddl_charTarget.Location = new System.Drawing.Point(61, 48);
             this.ddl_charTarget.Name = "ddl_charTarget";
@@ -150,6 +163,16 @@
             this.label3.Size = new System.Drawing.Size(43, 17);
             this.label3.TabIndex = 3;
             this.label3.Text = "target";
+            // 
+            // btn_restore
+            // 
+            this.btn_restore.Location = new System.Drawing.Point(240, 48);
+            this.btn_restore.Name = "btn_restore";
+            this.btn_restore.Size = new System.Drawing.Size(75, 23);
+            this.btn_restore.TabIndex = 2;
+            this.btn_restore.Text = "restore";
+            this.btn_restore.UseVisualStyleBackColor = true;
+            this.btn_restore.Click += new System.EventHandler(this.btn_restore_Click);
             // 
             // btnGo
             // 
@@ -183,6 +206,14 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btn_replace_group);
+            this.tabPage2.Controls.Add(this.btn_restore_group);
+            this.tabPage2.Controls.Add(this.ddl_replace_group);
+            this.tabPage2.Controls.Add(this.ddl_target_group);
+            this.tabPage2.Controls.Add(this.ddl_group);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -190,6 +221,93 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "group";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btn_replace_group
+            // 
+            this.btn_replace_group.Location = new System.Drawing.Point(183, 82);
+            this.btn_replace_group.Name = "btn_replace_group";
+            this.btn_replace_group.Size = new System.Drawing.Size(75, 23);
+            this.btn_replace_group.TabIndex = 2;
+            this.btn_replace_group.Text = "go";
+            this.btn_replace_group.UseVisualStyleBackColor = true;
+            this.btn_replace_group.Click += new System.EventHandler(this.btn_replace_group_Click);
+            // 
+            // btn_restore_group
+            // 
+            this.btn_restore_group.Location = new System.Drawing.Point(183, 45);
+            this.btn_restore_group.Name = "btn_restore_group";
+            this.btn_restore_group.Size = new System.Drawing.Size(75, 23);
+            this.btn_restore_group.TabIndex = 2;
+            this.btn_restore_group.Text = "restore";
+            this.btn_restore_group.UseVisualStyleBackColor = true;
+            this.btn_restore_group.Click += new System.EventHandler(this.btn_restore_group_Click);
+            // 
+            // ddl_replace_group
+            // 
+            this.ddl_replace_group.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddl_replace_group.FormattingEnabled = true;
+            this.ddl_replace_group.Items.AddRange(new object[] {
+            "μ\'s",
+            "Aqours",
+            "Saint Snow"});
+            this.ddl_replace_group.Location = new System.Drawing.Point(56, 80);
+            this.ddl_replace_group.Name = "ddl_replace_group";
+            this.ddl_replace_group.Size = new System.Drawing.Size(121, 25);
+            this.ddl_replace_group.TabIndex = 1;
+            // 
+            // ddl_target_group
+            // 
+            this.ddl_target_group.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddl_target_group.FormattingEnabled = true;
+            this.ddl_target_group.Items.AddRange(new object[] {
+            "μ\'s",
+            "Aqours",
+            "Saint Snow"});
+            this.ddl_target_group.Location = new System.Drawing.Point(56, 42);
+            this.ddl_target_group.Name = "ddl_target_group";
+            this.ddl_target_group.Size = new System.Drawing.Size(121, 25);
+            this.ddl_target_group.TabIndex = 1;
+            // 
+            // ddl_group
+            // 
+            this.ddl_group.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddl_group.FormattingEnabled = true;
+            this.ddl_group.Items.AddRange(new object[] {
+            "μ\'s",
+            "Aqours",
+            "Saint Snow"});
+            this.ddl_group.Location = new System.Drawing.Point(56, 7);
+            this.ddl_group.Name = "ddl_group";
+            this.ddl_group.Size = new System.Drawing.Size(121, 25);
+            this.ddl_group.TabIndex = 1;
+            this.ddl_group.SelectedIndexChanged += new System.EventHandler(this.ddl_group_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 83);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(51, 17);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "replace";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 45);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 17);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "target";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 17);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "group";
             // 
             // Form1
             // 
@@ -207,6 +325,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,5 +348,14 @@
         private ComboBox ddl_charReplace;
         private Label label4;
         private Button btnGo;
+        private Button btn_restore;
+        private Label label5;
+        private ComboBox ddl_group;
+        private Label label6;
+        private ComboBox ddl_replace_group;
+        private ComboBox ddl_target_group;
+        private Label label7;
+        private Button btn_replace_group;
+        private Button btn_restore_group;
     }
 }
